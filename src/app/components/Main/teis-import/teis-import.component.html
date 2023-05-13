@@ -1,0 +1,39 @@
+
+
+<form [formGroup]="ConfigForm">
+  <div mat-dialog-content  >
+    <input type="file" (change)="onFileChange($event) " multiple="false" class="custom-file-input" accept=".xlsx, .xls">
+
+    <div class="div-mat">
+      <!-- <mat-form-field appearance="outline">
+        <mat-label>Euro</mat-label>
+        <input matInput type="number" placeholder="Euro" disabled [value]="1">
+        <mat-icon matSuffix>euro_symbol</mat-icon>
+      </mat-form-field> -->
+
+      <mat-form-field appearance="outline">
+        <mat-label>1EURO => MAD</mat-label>
+        <input matInput type="number" min="0" placeholder="1EURO => MAD" formControlName="MAD">
+        <mat-icon matSuffix style="font-size: 20px;">DH</mat-icon>
+      </mat-form-field>
+    </div>
+
+    <div class="row">
+      <mat-form-field appearance="outline" class="col-sm">
+        <mat-label>Charged Entity</mat-label>
+        <input matInput type="number" min="0" placeholder="Charged Entity" disabled [value]="2183">
+      </mat-form-field>
+
+      <mat-form-field appearance="outline" class="col-sm">
+        <mat-label>Charged_Org_Name</mat-label>
+        <input matInput type="number" min="0" placeholder="Charged_Org_Name" disabled [value]="2183">
+      </mat-form-field>
+    </div>
+
+  </div>
+</form>
+
+<div mat-dialog-close [align]="'end'">
+  <button mat-raised-button color="primary" (click)="addBill()">Confirme</button>
+  <button mat-raised-button color="warn" mat-dialog-close style="margin-left: 9px; margin-right: 15px;">Close</button>
+</div>

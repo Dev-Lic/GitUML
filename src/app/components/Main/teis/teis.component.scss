@@ -1,0 +1,20 @@
+button.my-button{
+  display: inline-block;
+  margin: 0 30px;
+  width: 300px;
+  background-color: #ea8400;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+}
+button.my-button:hover{
+  background-color: #c98327;
+}
+.table-wrapper {
+  overflow: auto;
+}
+.mat-mdc-form-field {
+  font-size: 14px;
+  width: 100%;
+}

@@ -1,0 +1,74 @@
+{
+  "TEIS": [
+    {
+      "ID": 123,
+      "Billing_Org": "ABC Corp",
+      "Billing_Dept": "Marketing",
+      "Charged_Org": "XYZ Inc",
+      "Charged_Org_Name": "XYZ Inc",
+      "Charged_Dep": "Sales",
+      "Fiscal_Month": "January",
+      "Charged_Type": "Consulting",
+      "Charged_Unit": "Hours",
+      "Charged_Amount": 10000,
+      "Billable_Amount": "10000",
+      "Hyperion_Profit_Center": "1234",
+      "SAP_Profit_Center": "5678",
+      "Charged_Category": "Revenue",
+      "Revenue_Type": "Product Sales",
+      "Charged_entity": "Entity",
+      "Year": 2022,
+      "Month": "May"
+    },
+    {
+      "ID": 456,
+      "Billing_Org": "ACME Inc",
+      "Billing_Dept": "Operations",
+      "Charged_Org": "DEF Corp",
+      "Charged_Org_Name": "DEF Corp",
+      "Charged_Dep": "Manufacturing",
+      "Fiscal_Month": "February",
+      "Charged_Type": "Labor",
+      "Charged_Unit": "Hours",
+      "Charged_Amount": 5000,
+      "Billable_Amount": "5000",
+      "Hyperion_Profit_Center": "2468",
+      "SAP_Profit_Center": "1357",
+      "Charged_Category": "Expenses",
+      "Revenue_Type": "Overhead",
+      "Charged_entity": "Entity",
+      "Year": 2023,
+      "Month": "January"
+    },
+    {
+      "ID": 789,
+      "Billing_Org": "GHI LLC",
+      "Billing_Dept": "HR",
+      "Charged_Org": "JKL Co",
+      "Charged_Org_Name": "JKL Co",
+      "Charged_Dep": "Recruiting",
+      "Fiscal_Month": "March",
+      "Charged_Type": "Services",
+      "Charged_Unit": "Units",
+      "Charged_Amount": 8000,
+      "Billable_Amount": "8000",
+      "Hyperion_Profit_Center": "3691",
+      "SAP_Profit_Center": "2580",
+      "Charged_Category": "Revenue",
+      "Revenue_Type": "Service Sales",
+      "Charged_entity": "Entity",
+      "Year": 2021,
+      "Month": "December"
+    }
+  ],
+  "comments": [
+    {
+      "id": 1,
+      "body": "some comment",
+      "postId": 1
+    }
+  ],
+  "profile": {
+    "name": "typicode"
+  }
+}
