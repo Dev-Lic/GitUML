@@ -40,7 +40,8 @@ export class TEISComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   getAllTeis(){
-    this.api.getTEIS().subscribe(
+    this.api.getTEIS()
+    .subscribe(
       res=>{
         this.teisInvoices = res;
         console.log(res)

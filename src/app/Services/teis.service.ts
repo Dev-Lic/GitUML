@@ -11,4 +11,8 @@ export class TEISService {
   getTEIS(){
     return this.http.get<teisInvoices[]>("http://localhost:3000/TEIS");
   }
+
+  postTEIS(data:teisInvoices){
+    return this.http.post<teisInvoices>("http://localhost:3000/TEIS",data);
+  }
 }

@@ -2,33 +2,77 @@
 
 <form [formGroup]="ConfigForm">
   <div mat-dialog-content  >
-    <input type="file" (change)="onFileChange($event) " multiple="false" class="custom-file-input" accept=".xlsx, .xls">
+    <div>
+        <input type="file" (change)="onFileChange($event) " multiple="false" class="custom-file-input" accept=".xlsx, .xls">
 
-    <div class="div-mat">
-      <!-- <mat-form-field appearance="outline">
-        <mat-label>Euro</mat-label>
-        <input matInput type="number" placeholder="Euro" disabled [value]="1">
-        <mat-icon matSuffix>euro_symbol</mat-icon>
-      </mat-form-field> -->
+          <div class="div-mat">
+          <!-- <mat-form-field appearance="outline">
+            <mat-label>Euro</mat-label>
+            <input matInput type="number" placeholder="Euro" disabled [value]="1">
+            <mat-icon matSuffix>euro_symbol</mat-icon>
+          </mat-form-field> -->
 
-      <mat-form-field appearance="outline">
-        <mat-label>1EURO => MAD</mat-label>
-        <input matInput type="number" min="0" placeholder="1EURO => MAD" formControlName="MAD">
-        <mat-icon matSuffix style="font-size: 20px;">DH</mat-icon>
-      </mat-form-field>
+          <mat-form-field appearance="outline">
+            <mat-label>1EURO => MAD</mat-label>
+            <input matInput type="number" min="0" placeholder="EX. 11.32" formControlName="MAD" (input)="onUserInputChange($event)">
+            <mat-icon matSuffix style="font-size: 20px;">DH</mat-icon>
+          </mat-form-field>
+          <!-- <p>You entered: {{ userInput$ | async }}</p> -->
+        </div>
+
+        <div class="row">
+          <mat-form-field appearance="outline" class="col-sm">
+            <mat-label>Charged Entity</mat-label>
+            <input matInput type="number" min="0" placeholder="Charged Entity" disabled [value]="2183">
+          </mat-form-field>
+
+          <mat-form-field appearance="outline" class="col-sm">
+            <mat-label>Charged_Org_Name</mat-label>
+            <input matInput type="number" min="0" placeholder="Charged_Org_Name" disabled [value]="2183">
+          </mat-form-field>
+        </div>
     </div>
 
-    <div class="row">
-      <mat-form-field appearance="outline" class="col-sm">
-        <mat-label>Charged Entity</mat-label>
-        <input matInput type="number" min="0" placeholder="Charged Entity" disabled [value]="2183">
-      </mat-form-field>
+    <div *ngIf="headers">
+      <h1>conversion</h1>
+      <div class="row">
+        <div class="col-sm">
+          <h2>Input :</h2>
+          <ng-container *ngIf="headers">
+            <mat-form-field *ngFor="let header of headers; let i = index" appearance="outline">
+              <mat-label>{{ header }}</mat-label>
+              <input matInput placeholder="{{ header }}" value="{{ data[0][i] }}" >
+            </mat-form-field>
+          </ng-container>
+        </div>
 
-      <mat-form-field appearance="outline" class="col-sm">
-        <mat-label>Charged_Org_Name</mat-label>
-        <input matInput type="number" min="0" placeholder="Charged_Org_Name" disabled [value]="2183">
-      </mat-form-field>
+        <div class="col-sm">
+          <h2>Output :</h2>
+          <ng-container *ngIf="headers">
+            <mat-form-field *ngFor="let header of headers; let i = index" appearance="outline">
+              <mat-label>{{ header }}</mat-label>
+              <input matInput placeholder="{{ header }}" value="{{ data[0][i] }}" >
+            </mat-form-field>
+          </ng-container>
+        </div>
+      </div>
+
+
+        <!-- <table>
+          <thead>
+            <tr>
+              <th *ngFor="let header of headers">{{ header }}</th>
+            </tr>
+          </thead>
+          <tbody>
+            <tr *ngFor="let row of data">
+              <td *ngFor="let cell of row">{{ cell }}</td>
+            </tr>
+          </tbody>
+        </table> -->
+
     </div>
+
 
   </div>
 </form>
