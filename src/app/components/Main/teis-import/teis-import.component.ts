@@ -3,8 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
-import { Subject } from 'rxjs';
-import { teisInvoices } from 'src/app/Modules/teisInvoices.module';
+import { TEISService } from 'src/app/Services/teis.service';
 import * as XLSX from 'xlsx';
 
 @Component({
@@ -18,19 +17,16 @@ export class TeisImportComponent implements OnInit{
   ConfigForm !: FormGroup;
   data!: any[];
   headers!: string[];
-
+  
+  inputValue!:number;
 
   // @Output() dataImported = new EventEmitter();
 
   constructor(private formBuilder: FormBuilder,
-    private dialogRef: MatDialogRef<TeisImportComponent>,){}
+    private dialogRef: MatDialogRef<TeisImportComponent>,private api:TEISService){}
 
   ngOnInit(){
-    const subscription = this.MadInputSubject.subscribe((value: string) => {
-      console.log(value);
-      // store the value in a variable
-      const inputValue = value;
-    });
+
   }
 
   onFileChange(evt:any) {
@@ -55,7 +51,13 @@ export class TeisImportComponent implements OnInit{
         this.headers = this.data.shift();
         console.log(this.headers)
 
-        console.log(this.data);
+        for (let index = 0; index < this.data.length; index++) {
+          // const element = array[index];
+          // console.log(this.data[index]);
+          if (this.data[index].length !== 0) {
+            console.log(this.data[index]);
+          }          
+        }
       }
 
         reader.readAsBinaryString(target.files[0]);
@@ -68,12 +70,18 @@ export class TeisImportComponent implements OnInit{
       //   this.dialogRef.close(this.dataExcel)
       // }
     }
-    MadInputSubject = new Subject<string>();
-    MatInput$ = this.MadInputSubject.asObservable();
 
-    onUserInputChange(event: Event) {
-      const userInput = (event.target as HTMLInputElement).value;
-      this.MadInputSubject.next(userInput);
+    value: number | null = null;
+
+    onEnter(value: string) {
+      const parsedValue = parseFloat(value);
+      if (!isNaN(parsedValue)) {
+        this.value = parsedValue;
+      } else {
+        // Handle invalid input case
+        console.log('Invalid input:', value);
+      }
     }
+
 
 }

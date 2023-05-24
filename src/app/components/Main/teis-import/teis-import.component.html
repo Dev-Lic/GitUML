@@ -14,9 +14,11 @@
 
           <mat-form-field appearance="outline">
             <mat-label>1EURO => MAD</mat-label>
-            <input matInput type="number" min="0" placeholder="EX. 11.32" formControlName="MAD" (input)="onUserInputChange($event)">
+            <input matInput type="number" min="0" placeholder="EX. 11.32" formControlName="MAD" #box type="number" (keyup.enter)="onEnter(box.value)">
             <mat-icon matSuffix style="font-size: 20px;">DH</mat-icon>
           </mat-form-field>
+
+          <p *ngIf="value">{{value}}MAD == 1EURO</p>
           <!-- <p>You entered: {{ userInput$ | async }}</p> -->
         </div>
 
@@ -33,7 +35,7 @@
         </div>
     </div>
 
-    <div *ngIf="headers">
+    <div *ngIf="headers && value">
       <h1>conversion</h1>
       <div class="row">
         <div class="col-sm">
@@ -56,20 +58,6 @@
           </ng-container>
         </div>
       </div>
-
-
-        <!-- <table>
-          <thead>
-            <tr>
-              <th *ngFor="let header of headers">{{ header }}</th>
-            </tr>
-          </thead>
-          <tbody>
-            <tr *ngFor="let row of data">
-              <td *ngFor="let cell of row">{{ cell }}</td>
-            </tr>
-          </tbody>
-        </table> -->
 
     </div>
 

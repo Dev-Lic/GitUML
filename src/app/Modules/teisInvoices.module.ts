@@ -18,7 +18,7 @@ export class teisInvoices{
   // Year!:  number;
   // Month!:  String;
   constructor(
-    public ID: number,
+    // public ID: number,
     public Billing_Org: string,
     public Billing_Dept: string,
     public Charged_Org: string,
@@ -26,6 +26,7 @@ export class teisInvoices{
     public Charged_Dep: string,
     public Fiscal_Month: string,
     public Charged_Type: string,
+    public Charged_Type_Description: string,
     public Charged_Unit: string,
     public Charged_Amount: number,
     public Billable_Amount: string,
@@ -37,5 +38,5 @@ export class teisInvoices{
     public Year: number,
     public Month: string
   ) {}
-
+  // ['Billing Org', 'Billing Cost Center', 'Recovery Cost center', 'Charged Org', 'Charged Cost Center', 'Fiscal Month', 'Charge Type', 'Charge Type Description', 'Charge Unit', 'Charge_Desc', 'Charge_Amt_Num', 'BILLABLE_AMT_IND', 'Hyperion_Profit_Center', 'SAP_Profit_Center', 'CHARGE_CATEGORY', 'Revenue_Type', 'Charged Org']
 }
