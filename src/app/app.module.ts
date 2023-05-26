@@ -21,8 +21,11 @@ import { HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { HeaderComponent } from './components/Header/header/header.component';
-import { TEISComponent } from './components/Main/teis/teis.component';
-import { TeisImportComponent } from './components/Main/teis-import/teis-import.component';
+import { TEISComponent } from './components/Main/facture TEIS/teis/teis.component';
+import { TeisImportComponent } from './components/Main/facture TEIS/teis-import/teis-import.component';
+import { TelecomComponent } from './components/Main/facture telecom/telecom/telecom.component';
+import { TelecomImportComponent } from './components/Main/facture telecom/telecom-import/telecom-import.component';
+import { GeneralComponent } from './components/Main/dashboard/general/general.component';
 
 
 
@@ -38,7 +41,10 @@ import { TeisImportComponent } from './components/Main/teis-import/teis-import.c
     AppComponent,
     HeaderComponent,
     TEISComponent,
-    TeisImportComponent
+    TeisImportComponent,
+    TelecomComponent,
+    TelecomImportComponent,
+    GeneralComponent
   ],
   imports: [
     BrowserModule,

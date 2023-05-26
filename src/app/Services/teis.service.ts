@@ -21,8 +21,8 @@ export class TEISService {
     return this.http.get<teisInvoices[]>("http://localhost:3000/TEIS");
   }
 
-  postTEIS(data:teisInvoices[]){
-    return this.http.post<teisInvoices>("http://localhost:3000/TEIS",data).pipe(
+  postTEIS(data:any[]){
+    return this.http.post<any>("http://localhost:3000/TEIS",data).pipe(
       catchError(error => {
         // Handle error if necessary
         console.error('An error occurred:', error);

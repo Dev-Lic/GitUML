@@ -1,30 +1,21 @@
-import { Component, OnInit, ViewChild } from '@angular/core';
-
+import { Component, ViewChild } from '@angular/core';
+import { MatDialog } from '@angular/material/dialog';
 import { MatTableDataSource } from '@angular/material/table';
+import { TelecomImportComponent } from '../telecom-import/telecom-import.component';
+import * as XLSX from 'xlsx';
 import { MatPaginator } from '@angular/material/paginator';
 import { MatSort } from '@angular/material/sort';
-
-import { MatDialog } from '@angular/material/dialog';
-
-import * as XLSX from 'xlsx';
-import { TeisImportComponent } from '../teis-import/teis-import.component';
-import { teisInvoices } from 'src/app/Modules/teisInvoices.module';
 import { TEISService } from 'src/app/Services/teis.service';
 
-
 @Component({
-  selector: 'app-teis',
-  templateUrl: './teis.component.html',
-  styleUrls: ['./teis.component.scss']
+  selector: 'app-telecom',
+  templateUrl: './telecom.component.html',
+  styleUrls: ['./telecom.component.scss']
 })
-export class TEISComponent implements OnInit {
-  displayedColumns: string[] = ['ID', 'Billing_Org', 'Billing_Dept', 'Charged_Org',
-  'Charged_Org_Name', 'Charged_Dep', 'Fiscal_Month', 'Charged_Type', 'Charged_Type_Description','Charged_Unit',
-  'Charged_Amount', 'Billable_Amount','Hyperion_Profit_Center','SAP_Profit_Center',
-  'Charged_Category','Revenue_Type','Charged_entity','Year','Month'];
-
-    teisInvoices!: teisInvoices[];
-
+export class TelecomComponent {
+  displayedColumns: string[] = ['NOM', 'Codeclient', 'LIB PLAN', 'NUM_IDENT', 'Cycle', 'Ohrefnum',
+   'Num Tel', 'Abonnement', 'Remise Osm', 'Options', 'Frais De Souscription', 'Equipement', 'Frais Ponctuel',
+    'Frais Ponctuel Client', 'Promotions', 'Recharge Sur Facture', 'Usage', 'MHT', 'TVA', 'M TTC'];
 
     constructor(public dialog: MatDialog,private api:TEISService) { }
 
@@ -34,7 +25,7 @@ export class TEISComponent implements OnInit {
 }
 
 
-  dataSource!: MatTableDataSource<teisInvoices>;
+  dataSource!: MatTableDataSource<any>;
 
   @ViewChild(MatPaginator) paginator!: MatPaginator;
   @ViewChild(MatSort) sort!: MatSort;
@@ -42,20 +33,19 @@ export class TEISComponent implements OnInit {
   getAllTeis(){
     this.api.getTEIS()
     .subscribe(
-      res=>{
-        this.teisInvoices = res;
+      (res: any[] | undefined)=>{
         console.log(res)
-        this.dataSource= new MatTableDataSource(this.teisInvoices);
+        this.dataSource= new MatTableDataSource(res);
         this.dataSource.paginator = this.paginator;
         this.dataSource.sort = this.sort;
       },
-      err=>{alert("Error while fetching product")}
+      ()=>{alert("Error while fetching product")}
     );
   }
 
 
   openDialog() {
-    this.dialog.open(TeisImportComponent, {
+    this.dialog.open(TelecomImportComponent, {
       width:'50%',
       height:'65%'
     }).afterClosed().subscribe(result => {
@@ -90,5 +80,4 @@ export class TEISComponent implements OnInit {
     XLSX.writeFile(wb, this.fileName);
 
   }
-
 }

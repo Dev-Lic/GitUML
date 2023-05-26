@@ -17,7 +17,7 @@ export class TeisImportComponent implements OnInit{
   ConfigForm !: FormGroup;
   data!: any[];
   headers!: string[];
-  
+
   inputValue!:number;
 
   // @Output() dataImported = new EventEmitter();
@@ -26,7 +26,7 @@ export class TeisImportComponent implements OnInit{
     private dialogRef: MatDialogRef<TeisImportComponent>,private api:TEISService){}
 
   ngOnInit(){
-
+this.api.postTEIS
   }
 
   onFileChange(evt:any) {
@@ -56,7 +56,8 @@ export class TeisImportComponent implements OnInit{
           // console.log(this.data[index]);
           if (this.data[index].length !== 0) {
             console.log(this.data[index]);
-          }          
+            // console.log(this.data[index][2]+" XX "+this.data[index][2]*2);
+          }
         }
       }
 
