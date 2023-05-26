@@ -18,7 +18,7 @@ export class teisInvoices{
   // Year!:  number;
   // Month!:  String;
   constructor(
-    // public ID: number,
+    public ID: number,
     public Billing_Org: string,
     public Billing_Dept: string,
     public Charged_Org: string,

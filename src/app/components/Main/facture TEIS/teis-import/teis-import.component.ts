@@ -3,6 +3,7 @@ import { Component, OnInit } from '@angular/core';
 
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { MatDialogRef } from '@angular/material/dialog';
+import { TeisInvoiceInputModule } from 'src/app/Modules/teis-invoice-input.module';
 import { TEISService } from 'src/app/Services/teis.service';
 import * as XLSX from 'xlsx';
 
@@ -13,12 +14,16 @@ import * as XLSX from 'xlsx';
 })
 export class TeisImportComponent implements OnInit{
   // data !: teisInvoices[]   ;
-  dataExcel!: [][]
-  ConfigForm !: FormGroup;
   data!: any[];
   headers!: string[];
+  dataExcel: any[]=[]
+  dataPost: TeisInvoiceInputModule[] =[]
 
-  inputValue!:number;
+
+  ConfigForm !: FormGroup;
+
+
+
 
   // @Output() dataImported = new EventEmitter();
 
@@ -26,7 +31,10 @@ export class TeisImportComponent implements OnInit{
     private dialogRef: MatDialogRef<TeisImportComponent>,private api:TEISService){}
 
   ngOnInit(){
-this.api.postTEIS
+    this.ConfigForm = this.formBuilder.group({
+      MAD:[null,Validators.required]
+    })
+
   }
 
   onFileChange(evt:any) {
@@ -55,10 +63,41 @@ this.api.postTEIS
           // const element = array[index];
           // console.log(this.data[index]);
           if (this.data[index].length !== 0) {
-            console.log(this.data[index]);
+            // console.log(this.data[index]);
+            this.dataExcel.push(this.data[index])
+            // console.log(this.dataExcel)
             // console.log(this.data[index][2]+" XX "+this.data[index][2]*2);
           }
         }
+        console.log(this.dataExcel[0].length)
+        for (let index = 0; index < this.dataExcel.length; index++) {
+          // this.dataPost[index].Billing_Org=this.dataExcel[index][0] : error cause the dataPost empty not intilized cant use this
+          // this.dataPost[index].Billing_Org=this.dataExcel[index][0]
+
+          const formData = new TeisInvoiceInputModule(
+            this.dataExcel[index][0], // Billing_Org
+            '', // Billing_Dept - Provide the appropriate value
+            this.dataExcel[index][3], // Charged_Org
+            '2183', // Charged_Org_Name
+            'null', // Charged_Dep
+            this.dataExcel[index][5], // Fiscal_Month
+            this.dataExcel[index][6], // Charge_Type
+            this.dataExcel[index][7], // Charge_Type_Description
+            this.dataExcel[index][8], // Charge_Unit
+            this.dataExcel[index][9], // Charge_Description
+            this.dataExcel[index][10], // Charge_Amount
+            this.dataExcel[index][11], // Billable_Amount
+            this.dataExcel[index][12], // Hyperion_Profit_Center
+            this.dataExcel[index][13], // SAP_Profit_Center
+            this.dataExcel[index][14], // Charge_Category
+            this.dataExcel[index][15], // Revenue_Type
+            '2183', // Charged_entity
+            2183, // Year
+            'OCT' // Month
+          );
+          this.dataPost.push(formData);
+        }
+        console.log(this.dataPost)
       }
 
         reader.readAsBinaryString(target.files[0]);
@@ -67,10 +106,21 @@ this.api.postTEIS
     addBill(){
       // if(this.ConfigForm.valid){
       //   console.log(this.ConfigForm.value);
-      //   console.log(this.dataExcel)
-      //   this.dialogRef.close(this.dataExcel)
+      //   // console.log(this.dataExcel)
+      //   // this.dialogRef.close(this.dataExcel)
       // }
-    }
+      // this.dataPost.forEach(element => {
+        console.log(this.dataPost[0])
+      //   this.api.postTEIS(this.dataPost[0]).subscribe({
+      //     next:(res)=>{
+      //       console.log(res)
+      //       console.log("Product added");
+      //     }
+        }
+      //   )
+      // }
+      // )
+
 
     value: number | null = null;
 
