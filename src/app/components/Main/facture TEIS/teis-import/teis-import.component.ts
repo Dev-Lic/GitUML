@@ -111,11 +111,16 @@ export class TeisImportComponent implements OnInit{
       // }
 
       this.dataPost.forEach(element => {
+        this.cpt++;
         this.api.postTEIS(element).subscribe({
           next:(res)=>{
-            this.cpt++;
-            console.log("Product added");
-          }
+            // console.log("Product added N"+this.cpt);
+
+            console.log("added : "+res)
+          },
+          error:(err)=>{
+            // console.log("Product error N"+this.cpt);
+          },
         }
         )
       })
