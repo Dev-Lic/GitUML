@@ -102,24 +102,25 @@ export class TeisImportComponent implements OnInit{
 
         reader.readAsBinaryString(target.files[0]);
     }
-
+    cpt:number = 0;
     addBill(){
       // if(this.ConfigForm.valid){
       //   console.log(this.ConfigForm.value);
       //   // console.log(this.dataExcel)
       //   // this.dialogRef.close(this.dataExcel)
       // }
-      // this.dataPost.forEach(element => {
-        console.log(this.dataPost[0])
-      //   this.api.postTEIS(this.dataPost[0]).subscribe({
-      //     next:(res)=>{
-      //       console.log(res)
-      //       console.log("Product added");
-      //     }
+
+      this.dataPost.forEach(element => {
+        this.api.postTEIS(element).subscribe({
+          next:(res)=>{
+            this.cpt++;
+            console.log("Product added");
+          }
         }
-      //   )
-      // }
-      // )
+        )
+      })
+      console.log(this.cpt)
+    }
 
 
     value: number | null = null;

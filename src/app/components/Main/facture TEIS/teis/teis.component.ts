@@ -17,14 +17,14 @@ import { TeisImportComponent } from '../teis-import/teis-import.component';
   styleUrls: ['./teis.component.scss']
 })
 export class TEISComponent implements OnInit {
-  displayedColumns: string[] = ['ID', 'Billing_Org', 'Billing_Dept', 'Charged_Org',
+  displayedColumns: string[] = ['id', 'Billing_Org', 'Billing_Dept', 'Charged_Org',
   'Charged_Org_Name', 'Charged_Dep', 'Fiscal_Month', 'Charged_Type', 'Charged_Type_Description','Charged_Unit',
   'Charged_Amount', 'Billable_Amount','Hyperion_Profit_Center','SAP_Profit_Center',
   'Charged_Category','Revenue_Type','Charged_entity','Year','Month'];
 
     teisInvoices!: teisInvoices[];
 
-    
+
     constructor(public dialog: MatDialog,private api:TEISService) { }
 
 
