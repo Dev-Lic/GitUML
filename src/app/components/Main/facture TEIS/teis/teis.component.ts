@@ -18,8 +18,8 @@ import { TeisImportComponent } from '../teis-import/teis-import.component';
 })
 export class TEISComponent implements OnInit {
   displayedColumns: string[] = ['id', 'Billing_Org', 'Billing_Dept', 'Charged_Org',
-  'Charged_Org_Name', 'Charged_Dep', 'Fiscal_Month', 'Charged_Type', 'Charged_Type_Description','Charged_Unit',
-  'Charged_Amount', 'Billable_Amount','Hyperion_Profit_Center','SAP_Profit_Center',
+  'Charged_Org_Name', 'Charged_Dep', 'Fiscal_Month', 'Charge_Type', 'Charge_Type_Description','Charge_Unit',
+  'Charge_Amount', 'Billable_Amount','Hyperion_Profit_Center','SAP_Profit_Center',
   'Charged_Category','Revenue_Type','Charged_entity','Year','Month'];
 
     teisInvoices!: teisInvoices[];
@@ -39,17 +39,17 @@ export class TEISComponent implements OnInit {
   @ViewChild(MatSort) sort!: MatSort;
 
   getAllTeis(){
-    this.api.getTEIS()
-    .subscribe(
-      res=>{
-        this.teisInvoices = res;
-        console.log(res)
-        this.dataSource= new MatTableDataSource(this.teisInvoices);
-        this.dataSource.paginator = this.paginator;
-        this.dataSource.sort = this.sort;
-      },
-      err=>{alert("Error while fetching product")}
-    );
+      this.api.getTEIS()
+      .subscribe(
+        res=>{
+          this.teisInvoices = res;
+          console.log(res)
+          this.dataSource= new MatTableDataSource(this.teisInvoices);
+          this.dataSource.paginator = this.paginator;
+          this.dataSource.sort = this.sort;
+        },
+        err=>{console.warn("Error while fetching product")}
+      );
   }
 
 

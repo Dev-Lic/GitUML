@@ -28,8 +28,8 @@ export class GeneralComponent implements OnInit{
           // console.log(this.labelData[index],this.colorData[index],this.realData[index])
           this.labelData.push(this.chartData[index].Month+"-"+this.chartData[index].Year);
           console.log(this.chartData[index].Billing_Dept)
-          this.realData.push(this.chartData[index].Charged_Amount);
-          console.log(this.chartData[index].Charged_Amount)
+          this.realData.push(this.chartData[index].Charge_Amount);
+          console.log(this.chartData[index].Charge_Amount)
           // this.colorData.push(this.chartData[index].colorCode);
           // console.log(this.labelData[index],this.colorData[index],this.realData[index])
         }

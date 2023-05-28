@@ -69,7 +69,7 @@ export class TeisImportComponent implements OnInit{
             // console.log(this.data[index][2]+" XX "+this.data[index][2]*2);
           }
         }
-        console.log(this.dataExcel[0].length)
+        // console.log(this.dataExcel[0].length)
         for (let index = 0; index < this.dataExcel.length; index++) {
           // this.dataPost[index].Billing_Org=this.dataExcel[index][0] : error cause the dataPost empty not intilized cant use this
           // this.dataPost[index].Billing_Org=this.dataExcel[index][0]
@@ -97,7 +97,7 @@ export class TeisImportComponent implements OnInit{
           );
           this.dataPost.push(formData);
         }
-        console.log(this.dataPost)
+        // console.log(this.dataPost)
       }
 
         reader.readAsBinaryString(target.files[0]);
@@ -110,21 +110,20 @@ export class TeisImportComponent implements OnInit{
       //   // this.dialogRef.close(this.dataExcel)
       // }
 
-      this.dataPost.forEach(element => {
-        this.cpt++;
+      this.dataPost.forEach((element,index) => {
+        const currentRow = index + 1;
         this.api.postTEIS(element).subscribe({
           next:(res)=>{
             // console.log("Product added N"+this.cpt);
-
-            console.log("added : "+res)
+            console.log("added : "+currentRow)
           },
           error:(err)=>{
-            // console.log("Product error N"+this.cpt);
+            console.log("Product error N"+currentRow);
           },
         }
         )
       })
-      console.log(this.cpt)
+      
     }
 
 
