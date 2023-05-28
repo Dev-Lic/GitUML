@@ -27,6 +27,13 @@ import { TelecomComponent } from './components/Main/facture telecom/telecom/tele
 import { TelecomImportComponent } from './components/Main/facture telecom/telecom-import/telecom-import.component';
 import { GeneralComponent } from './components/Main/dashboard/general/general.component';
 
+import {MatMenuModule} from '@angular/material/menu';
+import {MatExpansionModule} from '@angular/material/expansion';
+
+import {MatListModule} from '@angular/material/list';
+import { SidebarComponent } from './components/Side/sidebar/sidebar.component';
+import {MatSidenavModule} from '@angular/material/sidenav';
+import {MatDividerModule} from '@angular/material/divider'
 
 
 
@@ -44,7 +51,8 @@ import { GeneralComponent } from './components/Main/dashboard/general/general.co
     TeisImportComponent,
     TelecomComponent,
     TelecomImportComponent,
-    GeneralComponent
+    GeneralComponent,
+    SidebarComponent
   ],
   imports: [
     BrowserModule,
@@ -64,7 +72,12 @@ import { GeneralComponent } from './components/Main/dashboard/general/general.co
     FormsModule,
     HttpClientModule,
     MatTableModule,
-    MatPaginatorModule
+    MatPaginatorModule,
+    MatMenuModule,
+    MatExpansionModule,
+    MatListModule,
+    MatSidenavModule,
+    MatDividerModule
   ],
   providers: [],
   bootstrap: [AppComponent]

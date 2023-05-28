@@ -123,7 +123,7 @@ export class TeisImportComponent implements OnInit{
         }
         )
       })
-      
+      this.api.triggerEvent()
     }
 
 
