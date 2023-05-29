@@ -54,6 +54,7 @@ export class TeisImportComponent implements OnInit{
 
         // Store the parsed data in the data variable
         this.data = XLSX.utils.sheet_to_json(ws, {header: 1});
+        
 
         // Store the column headers in the headers variable
         this.headers = this.data.shift();

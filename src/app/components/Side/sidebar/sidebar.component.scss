@@ -1,0 +1,22 @@
+.list-item {
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 8px;
+  transition: background-color 0.3s;
+}
+
+.list-item:hover {
+  background-color: #c57214;
+}
+
+.list-item.active {
+  color: #e5e5e5;
+}
+
+
+.sidebar {
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+}

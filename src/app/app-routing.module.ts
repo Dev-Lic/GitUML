@@ -5,9 +5,9 @@ import { TEISComponent } from './components/Main/facture TEIS/teis/teis.componen
 import { TelecomComponent } from './components/Main/facture telecom/telecom/telecom.component';
 
 const routes: Routes = [
-  // {path:"", component: GeneralComponent},
-  // {path:"/TEIS", component: TEISComponent},
-  // {path:"/Telecom", component: TelecomComponent}
+  {path:"", component: GeneralComponent},
+  {path:"TEIS", component: TEISComponent},
+  {path:"Telecom", component: TelecomComponent}
 ];
 
 @NgModule({

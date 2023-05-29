@@ -1,11 +1,11 @@
-<div class="col-auto col-md-3 col-xl-2 px-sm-2 px-0" style="background-color: #ea8400;">
+<div class="col-auto px-sm-2 px-0 sidebar" style="background-color: #ea8400;">
   <div class="d-flex flex-column align-items-center align-items-sm-start px-3 pt-2 text-white min-vh-100">
     <!-- <h2>Menu</h2> -->
     <ul class="nav flex-column" id="menu">
       <li>
-        <button mat-button class="example-icon" style="background-color: #ea8400;">
+        <button mat-button class="example-icon">
           <mat-icon>home</mat-icon>
-          <span class="ms-1 d-none d-sm-inline">Dashboard</span>
+          <span class="ms-1 d-none d-sm-inline" routerLink="">Dashboard</span>
         </button>
       </li>
       <mat-divider></mat-divider>
@@ -16,29 +16,16 @@
         </button>
         <ul class="sub-menu" *ngIf="showInvoiceList">
           <li>
-            <button mat-button>TEIS</button>
+            <button mat-button routerLink="TEIS" class="list-item" [class.active]="isRouteActive('TEIS')">TEIS</button>
           </li>
           <li>
-            <button mat-button>Telecom</button>
+            <button mat-button routerLink="Telecom" class="list-item" [class.active]="isRouteActive('Telecom')">Telecom</button>
           </li>
         </ul>
       </li>
 
+
       <mat-divider></mat-divider>
-      <li>
-        <button mat-button class="example-icon">
-          <mat-icon>description</mat-icon>
-          <span class="ms-1 d-none d-sm-inline">Invoice</span>
-        </button>
-        <ul class="sub-menu">
-          <li>
-            <button mat-button>TEIS</button>
-          </li>
-          <li>
-            <button mat-button>Telecom</button>
-          </li>
-        </ul>
-      </li>
     </ul>
     <hr>
   </div>
