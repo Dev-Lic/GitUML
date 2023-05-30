@@ -19,13 +19,13 @@ export class TEISService {
   }
 
   getTEIS(){
-    return this.http.get<teisInvoices[]>("http://localhost:3000/TEIS");
+    return this.http.get<teisInvoices[]>("http://localhost:2000/api/Invoices");
   }
   cpt:number=0;
   private readonly TIMEOUT_DURATION = 10000; // Set timeout duration in milliseconds
 
   postTEIS(data:TeisInvoiceInputModule): Observable<any>{
-    return this.http.post<TeisInvoiceInputModule>("http://localhost:3000/TEIS",data,).pipe(
+    return this.http.post<TeisInvoiceInputModule>("http://localhost:2000/Invoices/charge",data,).pipe(
       timeout(this.TIMEOUT_DURATION),
       catchError(error => {
         // Handle error if necessary
@@ -36,6 +36,6 @@ export class TEISService {
       // finalize(() => {
       //   this.triggerEvent();
       // })
-    );;
+    );
   }
 }

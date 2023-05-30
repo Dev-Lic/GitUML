@@ -23,10 +23,6 @@ export class TeisImportComponent implements OnInit{
   ConfigForm !: FormGroup;
 
 
-
-
-  // @Output() dataImported = new EventEmitter();
-
   constructor(private formBuilder: FormBuilder,
     private dialogRef: MatDialogRef<TeisImportComponent>,private api:TEISService){}
 
@@ -54,7 +50,7 @@ export class TeisImportComponent implements OnInit{
 
         // Store the parsed data in the data variable
         this.data = XLSX.utils.sheet_to_json(ws, {header: 1});
-        
+
 
         // Store the column headers in the headers variable
         this.headers = this.data.shift();
@@ -98,18 +94,13 @@ export class TeisImportComponent implements OnInit{
           );
           this.dataPost.push(formData);
         }
-        // console.log(this.dataPost)
+        console.log(this.dataPost)
       }
 
         reader.readAsBinaryString(target.files[0]);
     }
     cpt:number = 0;
     addBill(){
-      // if(this.ConfigForm.valid){
-      //   console.log(this.ConfigForm.value);
-      //   // console.log(this.dataExcel)
-      //   // this.dialogRef.close(this.dataExcel)
-      // }
 
       this.dataPost.forEach((element,index) => {
         const currentRow = index + 1;

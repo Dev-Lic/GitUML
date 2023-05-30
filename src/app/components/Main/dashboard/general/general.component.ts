@@ -29,6 +29,8 @@ export class GeneralComponent implements OnInit{
           const label = this.chartData[index].Fiscal_Month;
           const realData = this.chartData[index].Charge_Amount;
 
+          const labelPie = this.chartData[index].Charged_Category;
+
           // Check labelData if contains the label
           this.updateChartData(label, realData, this.labelData, this.realData);
         }
