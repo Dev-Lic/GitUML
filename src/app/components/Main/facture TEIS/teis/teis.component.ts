@@ -10,6 +10,7 @@ import * as XLSX from 'xlsx';
 import { teisInvoices } from 'src/app/Modules/teisInvoices.module';
 import { TEISService } from 'src/app/Services/teis.service';
 import { TeisImportComponent } from '../teis-import/teis-import.component';
+import { Subscription } from 'rxjs';
 
 @Component({
   selector: 'app-teis',
@@ -17,7 +18,7 @@ import { TeisImportComponent } from '../teis-import/teis-import.component';
   styleUrls: ['./teis.component.scss']
 })
 export class TEISComponent implements OnInit {
-  displayedColumns: string[] = ['id', 'Billing_Org', 'Billing_Dept', 'Charged_Org',
+  displayedColumns: string[] = ['ID', 'Billing_Org', 'Billing_Dept', 'Charged_Org',
   'Charged_Org_Name', 'Charged_Dep', 'Fiscal_Month', 'Charge_Type', 'Charge_Type_Description','Charge_Unit',
   'Charge_Amount', 'Billable_Amount','Hyperion_Profit_Center','SAP_Profit_Center',
   'Charged_Category','Revenue_Type','Charged_entity','Year','Month'];
@@ -27,10 +28,21 @@ export class TEISComponent implements OnInit {
 
     constructor(public dialog: MatDialog,private api:TEISService) { }
 
-
+    private eventSubscription!: Subscription;
     ngOnInit(): void {
       this.getAllTeis();
-}
+      this.eventSubscription =this.api.event$.subscribe(event => {
+        if (event) {
+          this.getAllTeis()
+        }
+      })
+    }
+
+    ngOnDestroy(): void {
+      if (this.eventSubscription) {
+        this.eventSubscription.unsubscribe();
+      }
+    }
 
 
   dataSource!: MatTableDataSource<teisInvoices>;

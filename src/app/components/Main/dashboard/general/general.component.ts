@@ -1,5 +1,6 @@
 import { Component,OnInit } from '@angular/core';
 import { Chart,registerables } from 'node_modules/chart.js';
+import { Subscription } from 'rxjs';
 import { teisInvoices } from 'src/app/Modules/teisInvoices.module';
 import { TEISService } from 'src/app/Services/teis.service';
 Chart.register(...registerables);
@@ -13,11 +14,23 @@ export class GeneralComponent implements OnInit{
   chartData!:teisInvoices[];
   labelData:any[]=[];
   labelData1:any[]=[];
+  labelDataPie:any[]=[];
+  labelDataPie_Charge_Type:any[]=[];
+  labelDataPie_Charge_Type_Description:any[]=[];
+
+
   colorData:any[]=[];
   realData:any[]=[]
   realData1:any[]=[]
+  realDataPie:any[]=[]
+  realDataPie_Charge_Type:any[]=[]
+  realDataPie_Charge_Type_Description:any[]=[]
 
-  constructor(private api:TEISService){}
+  constructor(private api:TEISService){
+    this.selectedOption="_Charged_Org"
+  }
+
+  private eventSubscription!: Subscription;
   ngOnInit(): void {
     this.api.getTEIS().
     subscribe(x=>{
@@ -25,46 +38,91 @@ export class GeneralComponent implements OnInit{
       console.log(this.chartData)
 
       if (this.chartData != null) {
-        for (let index = 0; index < this.chartData.length; index++) {
-          const label = this.chartData[index].Fiscal_Month;
-          const realData = this.chartData[index].Charge_Amount;
+        this.processChartData();
+        this.handleSelectedOption()
 
-          const labelPie = this.chartData[index].Charged_Category;
-
-          // Check labelData if contains the label
-          this.updateChartData(label, realData, this.labelData, this.realData);
-        }
-
-        const fiscalMonthComparator = (a: string, b: string): number => {
-          const monthsInOrder = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
-
-          const [aMonth, aYear] = a.split('-');
-          const [bMonth, bYear] = b.split('-');
-
-          // Compare years first
-          if (aYear !== bYear) {
-            return parseInt(aYear) - parseInt(bYear);
-          }
-
-          // Compare months
-          return monthsInOrder.indexOf(aMonth) - monthsInOrder.indexOf(bMonth);
-        };
-
-        // Sort labelData using the fiscalMonthComparator
-        this.labelData.sort(fiscalMonthComparator);
-        console.log(this.labelData)
-        const last12FiscalMonths = this.generateLast12FiscalMonths(this.labelData);
-        console.log(last12FiscalMonths)
-        this.assignChargedAmount(last12FiscalMonths);
-
-        this.renderPieChart(this.labelData, this.realData, this.colorData, 'pie', 'piechart');
-        this.renderChart(this.labelData1, this.realData1, this.colorData, 'bar', 'barchart');
-      }
-      }
-
+      }}
     )
-
   }
+
+  ngOnDestroy(): void {
+    if (this.eventSubscription) {
+      this.eventSubscription.unsubscribe();
+    }
+  }
+
+  // Function to process chart data
+  processChartData(): void {
+    for (let index = 0; index < this.chartData.length; index++) {
+      const label = this.chartData[index].Fiscal_Month;
+      const realData = this.chartData[index].Charge_Amount;
+
+      const labelPie_Charged_Org = this.chartData[index].Charged_Org;
+      const labelPie_Charge_Type = this.chartData[index].Charge_Type;
+      const labelPie_Charge_Type_Description = this.chartData[index].Charge_Type_Description;
+      // console.log(":"+label+":")
+
+      // Check labelData if it contains the label
+      this.updateChartData(label.replace(/\s+/g, ' ').trim(), realData, this.labelData, this.realData);
+      this.updateChartData(labelPie_Charged_Org,realData,this.labelDataPie,this.realDataPie)
+
+      this.updateChartData(labelPie_Charge_Type,realData,this.labelDataPie_Charge_Type,this.realDataPie_Charge_Type)
+      this.updateChartData(labelPie_Charge_Type_Description,realData,this.labelDataPie_Charge_Type_Description,this.realDataPie_Charge_Type_Description)
+    }
+    console.log("0-")
+    console.log(this.labelData);
+    console.log(this.realData);
+    console.log(this.labelDataPie);
+    console.log(this.realDataPie);
+      const fiscalMonthComparator = (a: string, b: string): number => {
+      const monthsInOrder = ['JAN', 'FEB', 'MAR', 'APR', 'MAY', 'JUN', 'JUL', 'AUG', 'SEP', 'OCT', 'NOV', 'DEC'];
+
+      const [aMonth, aYear] = a.split('-');
+      const [bMonth, bYear] = b.split('-');
+
+      // Compare years first
+      if (aYear !== bYear) {
+        return parseInt(aYear) - parseInt(bYear);
+      }
+
+      // Compare months
+      return monthsInOrder.indexOf(aMonth) - monthsInOrder.indexOf(bMonth);
+    };
+
+    // Sort labelData using the fiscalMonthComparator
+    this.labelData.sort(fiscalMonthComparator);
+    console.log("1-")
+    console.log(this.labelData);
+    console.log(this.realData);
+    const last12FiscalMonths = this.generateLast12FiscalMonths(this.labelData);  //only generate month problem with charge amt not updated
+    console.log("2-")
+    console.log(last12FiscalMonths);
+
+    console.log("3-")
+    this.assignChargedAmount(last12FiscalMonths);
+    console.log(this.labelData1)
+    console.log(this.realData1)
+
+    this.renderChart(this.labelData1, this.realData1, this.colorData, 'bar', 'barchart');
+  }
+
+  selectedOption!: string;
+  handleSelectedOption(): void {
+    switch (this.selectedOption) {
+      case '_Charged_Org':
+        this.renderPieChart(this.labelDataPie, this.realDataPie, this.colorData, 'pie', 'piechart');
+        break;
+      case '_Charge_Type':
+        this.renderPieChart(this.labelDataPie_Charge_Type, this.realDataPie, this.colorData, 'pie', 'piechart');
+        break;
+      case '_Charge_Type_Description':
+        this.renderPieChart(this.labelDataPie_Charge_Type_Description, this.realDataPie, this.colorData, 'pie', 'piechart');
+        break;
+      default:
+        break;
+    }
+  }
+
 
   updateChartData(label: string, realData: number, labelData: string[], realDataArray: number[]): void {
     const labelIndex = labelData.indexOf(label);
@@ -106,16 +164,15 @@ export class GeneralComponent implements OnInit{
     for (const fiscalMonth of last12FiscalMonths) {
       const index = this.labelData.indexOf(fiscalMonth);
       if (index !== -1) {
-        const chargedAmount = this.chartData[index].Charge_Amount;
-        this.labelData1.push(fiscalMonth);
-        this.realData1.push(chargedAmount);
+        const realData = this.realData[index];
+        this.updateChartData(fiscalMonth, realData, this.labelData1, this.realData1);
       } else {
         const chargedAmount = 0;
-        this.labelData1.push(fiscalMonth);
-        this.realData1.push(chargedAmount);
+        this.updateChartData(fiscalMonth, chargedAmount, this.labelData1, this.realData1);
       }
     }
   }
+
 
   renderChart(labelData:any,mainData:any,colorData:any,type:any,id:any){
     // new Chart("piechart", {
@@ -190,7 +247,7 @@ export class GeneralComponent implements OnInit{
         // labels: ['2017', '2018', '2019', '2020', '2021', '2022'],
         labels: labelData,
         datasets: [{
-          label: '# Sales (10.000 DH)',
+          label: '# Charged_Org',
           // data: [12, 19, 3, 5, 2, 3],
           data: mainData,
           borderWidth: 2,

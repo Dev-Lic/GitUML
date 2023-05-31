@@ -8,9 +8,18 @@
     <div class="col">
       First Column of Second Row
     </div>
-    <div class="col-lg-5">
+    <div class="col-lg-5 pieChart">
       Second Column of Second Row
-      <h2>Bar Chart</h2>
+      <h2>Pie Chart</h2>
+      <mat-form-field>
+        <mat-label>Pie Chart by</mat-label>
+        <select matNativeControl required [(ngModel)]="selectedOption">
+          <option value="_Charged_Org">_Charged_Org</option>
+          <option value="_Charge_Type">_Charge_Type</option>
+          <option value="_Charge_Type_Description">_Charge_Type_Description</option>
+        </select>
+      </mat-form-field>
+      <p>{{ selectedOption }}</p>
       <canvas id="piechart"></canvas>
     </div>
   </div>
