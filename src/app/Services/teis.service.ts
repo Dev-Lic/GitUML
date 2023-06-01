@@ -19,13 +19,13 @@ export class TEISService {
   }
 
   getTEIS(){
-    return this.http.get<teisInvoices[]>("http://localhost:2000/api/Invoices");
+    return this.http.get<teisInvoices[]>("http://localhost:2000/Invoices");
   }
   
   private readonly TIMEOUT_DURATION = 10000; // Set timeout duration in milliseconds
 
   postTEIS(data:any): Observable<any>{
-    return this.http.post<any>("http://localhost:2000/api/Invoices/charge",data,).pipe(
+    return this.http.post<any>("http://localhost:2000/Invoices/charge",data,).pipe(
       timeout(this.TIMEOUT_DURATION),
       catchError(error => {
         // Handle error if necessary

@@ -1,6 +1,9 @@
 import { Component } from '@angular/core';
 import { MatExpansionPanel } from '@angular/material/expansion';
 import { Router } from '@angular/router';
+import { AuthGuardService } from 'src/app/Services/auth-guard.service';
+import { UserService } from 'src/app/Services/user.service';
+
 
 @Component({
   selector: 'app-sidebar',
@@ -9,7 +12,21 @@ import { Router } from '@angular/router';
 })
 export class SidebarComponent {
   showInvoiceList: boolean = false;
-  constructor(private router:Router){}
+  isauthenticated = false 
+
+
+
+
+  constructor(private auth: UserService, private router:Router){}
+  
+
+
+  ngOnInit(): void {
+    this.auth.isUserLoggedIn$.subscribe((isLoggedIn)=>{
+         this.isauthenticated = isLoggedIn;
+    })
+  }
+
   toggleInvoiceList() {
     this.showInvoiceList = !this.showInvoiceList;
   }

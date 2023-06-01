@@ -33,7 +33,8 @@ import {MatExpansionModule} from '@angular/material/expansion';
 import {MatListModule} from '@angular/material/list';
 import { SidebarComponent } from './components/Side/sidebar/sidebar.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
-import {MatDividerModule} from '@angular/material/divider'
+import {MatDividerModule} from '@angular/material/divider';
+import { LoginComponent } from './components/Main/login/login.component'
 
 
 
@@ -52,7 +53,8 @@ import {MatDividerModule} from '@angular/material/divider'
     TelecomComponent,
     TelecomImportComponent,
     GeneralComponent,
-    SidebarComponent
+    SidebarComponent,
+    LoginComponent
   ],
   imports: [
     BrowserModule,

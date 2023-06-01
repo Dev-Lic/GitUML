@@ -1,0 +1,84 @@
+
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/skeleton/2.0.4/skeleton.min.css">
+
+<form [formGroup]="formGroup" (submit)="loginUser()" autocomplete="new-password" >
+
+
+   <div class="form-control">
+    <div>
+    <label for="email">Email</label>
+  <input [class.invalid]="control.invalid && control.dirty && control.touched" [formControl]="formGroup.controls.email" id="email" type="email" />
+     <!-- <ng-container *ngIf="control.invalid && control.dirty && control.touched">
+
+        <div *ngfor="let err of control.errors | keyvalue" class="error">
+           {{ errorMessages[err.key]  }}
+        </div>
+
+</ng-container> -->
+</div>
+
+
+
+<div>
+  <label for="email">Password</label>
+<input [class.invalid]="control.invalid && control.dirty && control.touched" [formControl]="formGroup.controls.password" id="password" type="password" />
+   <!-- <ng-container *ngIf="control.invalid && control.dirty && control.touched">
+
+      <div *ngfor="let err of control.errors | keyvalue" class="error">
+         {{ errorMessages[err.key]  }}
+
+      </div>
+
+</ng-container> -->
+</div>
+
+
+
+</div>
+
+
+<button  type="submit">Login &#8594;</button>
+  
+</form> 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+<!-- 
+
+<form [formGroup]="loginForm" (submit)="loginUser()" autocomplete="new-password">
+    <h1>Login</h1>
+  
+    <div class="form-control">
+      <label for="email">Email</label>
+      <input formControlName="email" id="email" autocomplete="new-password" type="email"/>
+
+    </div>
+  
+    <div class="form-control">
+      <label for="password">Password</label>
+      <input formControlName="password" id="password" autocomplete="new-password" type="password"
+      
+      />
+    </div>
+  
+    <button type="submit">Login &#8594;</button>
+  </form> -->
