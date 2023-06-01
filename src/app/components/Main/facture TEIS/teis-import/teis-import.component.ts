@@ -54,6 +54,7 @@ export class TeisImportComponent implements OnInit{
 
         // Store the column headers in the headers variable
         this.headers = this.data.shift();
+        console.log("1-")
         console.log(this.headers)
 
         for (let index = 0; index < this.data.length; index++) {
@@ -66,7 +67,8 @@ export class TeisImportComponent implements OnInit{
             // console.log(this.data[index][2]+" XX "+this.data[index][2]*2);
           }
         }
-        // console.log(this.dataExcel[0].length)
+        console.log("2-")
+        console.log(this.dataExcel)
         for (let index = 0; index < this.dataExcel.length; index++) {
           // this.dataPost[index].Billing_Org=this.dataExcel[index][0] : error cause the dataPost empty not intilized cant use this
           // this.dataPost[index].Billing_Org=this.dataExcel[index][0]
@@ -86,7 +88,7 @@ export class TeisImportComponent implements OnInit{
             this.dataExcel[index][11], // Billable_Amount
             this.dataExcel[index][12], // Hyperion_Profit_Center
             this.dataExcel[index][13], // SAP_Profit_Center
-            this.dataExcel[index][14], // Charge_Category
+            ":"+this.dataExcel[index][14], // Charge_Category
             this.dataExcel[index][15], // Revenue_Type
             '2183', // Charged_entity
             2183, // Year
@@ -94,6 +96,7 @@ export class TeisImportComponent implements OnInit{
           );
           this.dataPost.push(formData);
         }
+        console.log("3-")
         console.log(this.dataPost)
       }
 
