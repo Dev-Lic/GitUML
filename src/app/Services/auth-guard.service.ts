@@ -10,13 +10,13 @@ import { UserService } from './user.service';
 })
 export class AuthGuardService implements CanActivate {
 
-  constructor(private UserService: UserService , private router: Router) { }
+  constructor(private auth : UserService , private router: Router) { }
 
    canActivate(): Observable<boolean>{
-       if (!this.UserService.isUserLoggedIn$.value){
+       if (!this.auth.isUserLoggedIn$.value){
         this.router.navigate(['/login']);
        }
-       return this.UserService.isUserLoggedIn$;
+       return this.auth.isUserLoggedIn$;
 
    }
 

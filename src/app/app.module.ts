@@ -17,7 +17,7 @@ import {MatDatepickerModule} from '@angular/material/datepicker';
 import {MatNativeDateModule}from '@angular/material/core';
 import {MatRadioModule} from '@angular/material/radio';
 import { FormsModule, ReactiveFormsModule } from '@angular/forms';
-import { HttpClientModule } from '@angular/common/http';
+import { HTTP_INTERCEPTORS, HttpClientModule } from '@angular/common/http';
 import {MatTableModule} from '@angular/material/table';
 import {MatPaginatorModule} from '@angular/material/paginator';
 import { HeaderComponent } from './components/Header/header/header.component';
@@ -35,6 +35,7 @@ import { SidebarComponent } from './components/Side/sidebar/sidebar.component';
 import {MatSidenavModule} from '@angular/material/sidenav';
 import {MatDividerModule} from '@angular/material/divider';
 import { LoginComponent } from './components/Main/login/login.component'
+import { CustomInterceptorInterceptor } from './Services/custom-interceptor.interceptor.service';
 
 
 
@@ -81,7 +82,13 @@ import { LoginComponent } from './components/Main/login/login.component'
     MatSidenavModule,
     MatDividerModule
   ],
-  providers: [],
+  providers: [
+    {
+      provide: HTTP_INTERCEPTORS,
+      useClass: CustomInterceptorInterceptor,
+      multi: true
+    }
+  ],
   bootstrap: [AppComponent]
 })
 export class AppModule { }

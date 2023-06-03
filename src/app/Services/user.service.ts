@@ -15,6 +15,7 @@ export class UserService {
 
   constructor(private http:HttpClient, private router: Router) { }
 
+
 postLogin(data: any){
 
   this.http.post('http://localhost:2000/auth/login', data)
@@ -22,9 +23,10 @@ postLogin(data: any){
     (response:any) => {
       console.log('response :', response);
       console.log('you are logged in ',data); 
-      localStorage.setItem('token', JSON.stringify(response.accessToken))
+      localStorage.setItem('token', response.accessToken)
+      // localStorage.setItem('token',response.)
       this.isUserLoggedIn$.next(true);
-      this.router.navigateByUrl('/home');
+      this.router.navigateByUrl('/');
       // Emitters.authEmitter.emit(true)
     
     },
@@ -45,12 +47,19 @@ logout(){}
   headers: new HttpHeaders({ "Content-Type": "application/json" }),
 };
 
-isUserLoggedIn(): boolean {
-  if (localStorage.getItem("token") != null) {
-    return true;
-  }
-  return false;
+// isUserLoggedIn(): boolean {
+//   if (localStorage.getItem("token") != null) {
+//     return true;
+//   }
+//   return false;
+// }
+
+
+isUserLoggedIn(){
+ return !!localStorage.getItem('token');
 }
+
+
 
 
 }
